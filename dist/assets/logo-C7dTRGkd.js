@@ -1,0 +1,1 @@
+var e=`/assets/logo-pBcowiSA.png`;export{e as t};

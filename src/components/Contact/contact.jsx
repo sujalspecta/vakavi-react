@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { Animated } from "react-animated-css";
 import FormContact from "./Form";
 
 class GetInTouch extends Component {
@@ -86,12 +85,13 @@ class GetInTouch extends Component {
                 <h4>Send us a message!</h4>
                 <div id="message">
                   {this.state.msgSendSuccess ? (
-                    <Animated
-                      animationIn="bounceInLeft"
-                      animationOut="zoomOutDown"
-                      animationInDuration={1000}
-                      animationOutDuration={1000}
-                      isVisible={true}
+                    /* 
+                      MODERN IMPLEMENTATION: Uses standard HTML with animate.css classes.
+                      --animate-duration sets the timing directly in inline CSS matching your old setup.
+                    */
+                    <div 
+                      className="animate__animated animate__bounceInLeft"
+                      style={{ '--animate-duration': '1000ms' }}
                     >
                       <fieldset>
                         <div id="success_page">
@@ -102,7 +102,7 @@ class GetInTouch extends Component {
                           </p>
                         </div>
                       </fieldset>
-                    </Animated>
+                    </div>
                   ) : null}
                 </div>
                 <FormContact />
