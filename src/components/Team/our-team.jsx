@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
 
 //Import Components
-import SectionTitle from "../../components/common/section-title";
+import SectionTitle from "../common/section-title";
 
 //Import Team Box
 import TeamBox from "./team-box";

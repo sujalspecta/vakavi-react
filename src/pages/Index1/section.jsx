@@ -2,30 +2,33 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
-//Importing Modal
 import ModalSection from '../../components/common/ModalSection';
-
-//Import Image
-// import img1 from "../../assets/images/bg-home.jpg";
 
 class Section extends Component {
     constructor() {
         super();
         this.state = {
             isOpen: false,
-            height:window.innerHeight
+            height: window.innerHeight
         }
+        
+        // 1. Create the modern ref object
+        this.modalRef = React.createRef(); 
+
         this.setFullScreen.bind(this);
         this.callModal.bind(this);
     }
 
+    // 2. Call the child method using the modern ref object
     callModal = () => {
-        this.refs.child.openModal();
+        if (this.modalRef.current) {
+            this.modalRef.current.openModal();
+        }
     }
 
     setFullScreen = () => {
         var topSectionEl = document.getElementById('home-fullscreen');
-        if(topSectionEl.clientHeight>0) {
+        if(topSectionEl && topSectionEl.clientHeight > 0) {
             var windowHeight = window.innerHeight;
             this.setState({ 
                 height: windowHeight
@@ -39,7 +42,8 @@ class Section extends Component {
     }
 
     componentWillUnmount(){
-        window.addEventListener("resize", this.setFullScreen);
+        // FIXED: Changed from addEventListener to removeEventListener to prevent memory leaks
+        window.removeEventListener("resize", this.setFullScreen);
     }
     
     render() {
@@ -66,8 +70,8 @@ class Section extends Component {
                             </div>
                         </Col>
                     </Row>
-                    {/* Render ModalSection Component for Modal */}
-                    <ModalSection ref="child" channel='vimeo' videoId='99025203' />
+                    {/* 3. Render ModalSection Component using the new ref instance */}
+                    <ModalSection ref={this.modalRef} channel='vimeo' videoId='99025203' />
                 </Container>
             </section>
             </React.Fragment>
